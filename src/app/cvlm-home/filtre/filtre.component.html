@@ -1,0 +1,32 @@
+<div class="widget-f">
+	<select>
+		<option *ngFor="let filtre of lesFiltres" (click)="onSelect(filtre)" >
+			{{ filtre }}
+		</option>
+	</select>
+	<button *ngIf="!isSelectedStats" (click)="onOpenStats($event)"> Stats </button>
+	<button *ngIf="isSelectedStats" (click)="onCloseStats()"> Close </button>
+
+	<div *ngIf="filterSelected == 'date'" class="ui-g-12 ui-md-4">
+		<p-calendar [(ngModel)]="date" placeholder="Date de départ" [locale]="fr" dateFormat="yy-mm-dd" (onSelect)="onSelectDate($event)" ></p-calendar>
+	</div>
+
+	<form *ngIf="filterSelected == 'afficher seulement'">
+		<input type="radio" name="onlySelect" (click)="onRadio($event, 'positif')" value="positif" checked> Positif<br>
+		<input type="radio" name="onlySelect" (click)="onRadio($event, 'neutre')" value="neutre"> Neutre<br>
+		<input type="radio" name="onlySelect" (click)="onRadio($event, 'negatif')" value="negetif"> Négatif
+	</form>
+	<div class="grid-canvas-desc">
+		<div class="desc" *ngIf="isSelectedStats">
+			<h2>Les Stats</h2>
+			<!--ul>
+				<li *ngFor="let nbColor of data; let i = index">
+				 	{{ colors[i] }} ==> {{ nbColor / nbData *100 }} %
+				</li>
+			</ul-->
+		</div>
+		<canvas [style.display]="isSelectedStats ? '' : 'none'" class="canvas" id="pieChart" width="300" height="300" style="display: block, width: 300px; height: 300;"></canvas>
+	</div>
+</div>
+
+<router-outlet></router-outlet>

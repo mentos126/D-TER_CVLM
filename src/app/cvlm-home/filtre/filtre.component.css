@@ -1,0 +1,21 @@
+.widget-f {
+	position: absolute;
+	right : 100px;
+	z-index: 100;
+}
+.grid-canvas-desc[_ngcontent-c1] {
+	display: -ms-grid;
+	display: grid;
+	grid: 100% 100% / auto auto;
+	grid-gap: 10px;
+	padding: 10px;
+}
+
+.grid-canvas-desc[_ngcontent-c1] > div[_ngcontent-c1] {
+	height: 100%
+}
+.canvas {
+	position: absolute;
+	right: 20px;
+	top: 100px;
+}

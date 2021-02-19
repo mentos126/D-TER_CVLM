@@ -1,0 +1,103 @@
+.j-nb[_ngcontent-c3][_ngcontent-c3][_ngcontent-c3]{
+  margin-top: 65px;
+}
+
+.ntm[_ngcontent-c3][_ngcontent-c3][_ngcontent-c3] {
+  height: 30px;
+  padding: 0 15px;
+  cursor: pointer;
+  background: #4285f4;
+  color: white;
+
+}
+
+main.isSelectedMarker[_ngcontent-c3][_ngcontent-c3][_ngcontent-c3] {
+  padding-left: 0px;
+  width : calc(100% - 390px);
+}
+
+.sidebar[_ngcontent-c3][_ngcontent-c3] {
+  overflow-y: scroll;
+  width : 390px;
+}
+
+body[_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3] {
+  height: 100%;
+  width: 100%;
+}
+
+.grid-map-desc[_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3] {
+
+  padding: 0px;
+}
+
+.grid-map-desc[_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3]    > div[_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3] {
+  height: 100%
+}
+
+h2[_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3] {
+  text-align: center;
+}
+
+agm-map[_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3] {
+  height: 100vh;
+  width: 100%;
+}
+
+body[_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3] {
+  padding-top: 50px;
+}
+
+h1[_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3] {
+  margin-bottom: 20px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid #eee;
+}
+
+.nopadding[_ngcontent-c3][_ngcontent-c3][_ngcontent-c3] {
+  padding-left : 0 !important;
+  padding-right: 0 !important;
+}
+
+.nomargin.[_ngcontent-c3][_ngcontent-c3][_ngcontent-c3] {
+  margin : 0 !important;
+}
+
+.container-fluid.nopadding[_ngcontent-c3][_ngcontent-c3][_ngcontent-c3] {
+  overflow: hidden;
+}
+.widget-c{
+  position: absolute;
+  z-index: 200;
+  right : 10px;
+  padding-top : 3px;
+}
+.widget-c div {
+  position: relative;
+  display: block;
+
+}
+.widget-c .nobump{
+  margin-right: 30px;
+}
+.widget-c .bump{
+  margin-right: 0px !important;
+}
+
+
+.map-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.map-frame {
+  height: 100%;
+}
+
+#map {
+  height: 100%;
+}
