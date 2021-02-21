@@ -1,57 +1,43 @@
-
-<div class="container-fluid" [ngClass]="{'nopadding':!isSelectedMarker}" >
-
-	<div class="widget-c">
-		<button *ngIf="!isPlayed" class="nobump" (click)="play()"> play </button>
-		<button *ngIf="isPlayed" class="bump" (click)="play()"> pause </button>
-	</div>
-
-	<div class="row">
-
-		<nav class="hidden-xs-down bg-faded sidebar" style="padding-right:0px" *ngIf="isSelectedMarker"><!-- class="desc"-->
-
-				<div class="ntm" (click)="onCloseLocation(event)">
-
-		 			<span> < </span>
-				</div>
-
-			<router-outlet></router-outlet>
-
-		</nav>
-
-		<main [ngClass]="{'isSelectedMarker':isSelectedMarker, 'col-md-12':!isSelectedMarker}">
-
+<div class="container-fluid" [ngClass]="{'nopadding':!isSelectedMarker}">
+  <div class="widget-c">
+    <button *ngIf="!isPlayed" class="nobump" (click)="play()"> play </button>
+    <button *ngIf="isPlayed" class="bump" (click)="play()"> pause </button>
+  </div>
+  <div class="">
+    <nav class="sidebar" style="padding-right:0px; display: flex; justify-content: flex-end;" *ngIf="isSelectedMarker">
+      <div class="close" (click)="onCloseLocation(event)">
+        <span>&times;</span>
+      </div>
+      <router-outlet></router-outlet>
+    </nav>
+    <main [ngClass]="{'isSelectedMarker':isSelectedMarker, 'col-md-12':!isSelectedMarker}">
       <div class="map-container">
         <div class="map-frame">
           <div class="map" id="map"></div>
         </div>
       </div>
-			<!-- <div id="map" class=" map map-container" #map></div> -->
-
       <!-- <div class="map">
-				<agm-map (boundsChange)="onChangeCenterMap($event)"
-				(zoomChange)="zoomChange($event)"
-				[latitude]="lat" [longitude]="lng" [zoom]="zoom">
+          <agm-map (boundsChange)="onChangeCenterMap($event)"
+          (zoomChange)="zoomChange($event)"
+          [latitude]="lat" [longitude]="lng" [zoom]="zoom">
 
-				<agm-circle *ngFor="let mark of lesMarqueurs; let i = index"
-					[latitude]="mark.geo.lat"
-					[longitude]="mark.geo.lng"
-					[radius]="radius"
-					[fillColor]="mark.couleur"
-					[fillOpacity]="0.5"
-					[strokeColor]="'black'"
-					[zIndex]="mark.zIndex ? mark.zIndex : 5"
-					[strokeOpacity]="1.0"
-					[strokeWeight]="mark.stroke ? mark.stroke : 0"
-					[visible]="true"
-					[strokePosition]="outside"
-					(circleClick)="onChoseLocation($event,mark.id)">
-				</agm-circle>
+          <agm-circle *ngFor="let mark of lesMarqueurs; let i = index"
+            [latitude]="mark.geo.lat"
+            [longitude]="mark.geo.lng"
+            [radius]="radius"
+            [fillColor]="mark.couleur"
+            [fillOpacity]="0.5"
+            [strokeColor]="'black'"
+            [zIndex]="mark.zIndex ? mark.zIndex : 5"
+            [strokeOpacity]="1.0"
+            [strokeWeight]="mark.stroke ? mark.stroke : 0"
+            [visible]="true"
+            [strokePosition]="outside"
+            (circleClick)="onChoseLocation($event,mark.id)">
+          </agm-circle>
 
-			</agm-map>
-		</div> -->
-	</main>
-
-
-	</div>
+        </agm-map>
+      </div> -->
+    </main>
+  </div>
 </div>

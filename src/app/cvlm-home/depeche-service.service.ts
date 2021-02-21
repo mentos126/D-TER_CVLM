@@ -8,7 +8,7 @@ export class DepecheServiceService {
 
 
 	// private getAllDepeche: string = "/assets/data/marqueursServeur.json";
-	private API : string = "http://127.0.0.1/"
+	private API : string = "https://peaceful-lowlands-37724.herokuapp.com/"
 	private getAllDepeche : string = this.API + "getall"; 	// GET
 	private postDepeche : string = this.API + "add/depeche";	// POST
 	private postAll : string = this.API + "add/all";	// POST

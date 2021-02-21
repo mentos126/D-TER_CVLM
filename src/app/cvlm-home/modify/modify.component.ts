@@ -39,8 +39,8 @@ export class ModifyComponent implements OnInit {
 
 
   showModal(template : TemplateRef<any>): void {
-    const _combine = combineLatest(this.modalService.onHide).subscribe(
-      () => this.changeDetection.markForCheck());
+    const _combine = combineLatest(this.modalService.onHide)
+      .subscribe(() => this.changeDetection.markForCheck());
 
     this.subscriptions.push(
       this.modalService.onHide.subscribe((reason: string) => {
@@ -49,8 +49,10 @@ export class ModifyComponent implements OnInit {
       })
     );
     this.subscriptions.push(_combine);
-    this.modalRef = this.modalService.show(template);
+    console.log(template)
+    this.modalRef = this.modalService.show(template,{ class: 'modale'});
   }
+
   test() : void {
     this.depeche = this.copieDep;
     console.log(this.depeche)
@@ -60,7 +62,6 @@ export class ModifyComponent implements OnInit {
     console.log(index + ' ' + value);
     console.log(this.copieDep.polarite.detail[index].note);
     console.log(value + ' ' + typeof value);
-
 
     this.copieDep.polarite.detail[index].note = (typeof value == 'number' ? value : parseInt(value));
     this.reEval();
@@ -99,14 +100,15 @@ export class ModifyComponent implements OnInit {
         console.log('------------------------')
 			}
 			// SCORE général simplifié
-			if(this.copieDep.polarite.complet.pos > (this.copieDep.polarite.complet.neg * (-1)))
+			if(this.copieDep.polarite.complet.pos > (this.copieDep.polarite.complet.neg * (-1))){
 				this.copieDep.polarite.simple = this.copieDep.polarite.complet.pos
-			else if(this.copieDep.polarite.complet.pos < (this.copieDep.polarite.complet.neg * (-1)))
+      } else if(this.copieDep.polarite.complet.pos < (this.copieDep.polarite.complet.neg * (-1))) {
 				this.copieDep.polarite.simple = this.copieDep.polarite.complet.neg
-			else
+      } else {
         this.copieDep.polarite.simple = 0;
+      }
 
-        this.copieDep.couleur = this.evalColor(this.copieDep.polarite.simple);
+      this.copieDep.couleur = this.evalColor(this.copieDep.polarite.simple);
   }
 
   evalColor(value){
@@ -125,7 +127,6 @@ export class ModifyComponent implements OnInit {
 
   saveChanges(all : boolean) : void{
     //this.depeche = this.copieDep;
-
     this.depeche.polarite.complet.pos = this.copieDep.polarite.complet.pos;
     this.depeche.polarite.complet.neg = this.copieDep.polarite.complet.neg;
     this.depeche.polarite.complet.neut = this.copieDep.polarite.complet.neut;
@@ -136,15 +137,23 @@ export class ModifyComponent implements OnInit {
     }
     this.depeche.couleur = this.copieDep.couleur;
 
-    if(all)
+    if(all) {
       this.service
         .modifierTout(this.depeche)
-        .subscribe(res => console.log('Recorded with succes'))
-    else
-      this.service
+        .subscribe(res => {
+          this.modalRef.hide()
+          console.log('Recorded with success')
+        })
+      } else {
+        this.service
         .modifierDepeche(this.depeche)
-        .subscribe(res => console.log('Recorded with success'))
+        .subscribe(res => {
+          this.modalRef.hide()
+          console.log('Recorded with success')
+        })
+    }
   }
+
   ngOnInit() {
     this.descriptionService
     	.currentDepeche
