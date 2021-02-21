@@ -15,9 +15,8 @@ import { CarteServiceService } from './carte-service.service';
 
 
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
-// import { AgmCoreModule } from '@agm/core';
 
-// import { CalendarModule } from 'primeng/primeng';
+import { CalendarModule } from 'primeng/calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -28,13 +27,10 @@ import { ModifyComponent } from './modify/modify.component';
 @NgModule({
 	imports: [
 		HttpModule,
-		// CalendarModule,
+		CalendarModule,
 		BrowserAnimationsModule,
 		HttpClientModule,
 		CommonModule,
-		// AgmCoreModule.forRoot({
-		// 	apiKey: 'AIzaSyCm4g3sRwhhJBCtW2of8ta8VXpqNHEbb_Y'
-		// }),
 		CvlmHomeRoutingModule,
 		ModalModule.forRoot(),
 		BsDropdownModule.forRoot()

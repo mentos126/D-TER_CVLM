@@ -4,6 +4,7 @@ import { CarteServiceService } from '../carte-service.service'
 import { IDepeche, IData } from '../depeche';
 import * as Chart from 'chart.js';
 import * as moment from 'moment';
+import {CalendarModule} from 'primeng/calendar';
 
 @Component({
 	selector: 'app-filtre',
@@ -74,6 +75,7 @@ export class FiltreComponent implements  OnInit {
 	}
 
 	onSelect(s : string){
+    console.log(s)
 		this.filterSelected = s;
 		switch (s) {
 			case "aucun":
@@ -220,8 +222,8 @@ export class FiltreComponent implements  OnInit {
 				let duo = this.lesMarqueurs.find( element => {
 					return element.geo.formatedAdress == obj.geo.formatedAdress && element.title != obj.title;
 				});
-				// console.log(duo)
-				if(duo){
+
+        if(duo){
 					let marge_lat = (Math.random() * (0.000022222 - 0.000011111) + 0.000011111).toFixed(10);
 					let marge_lng = (Math.random() * (0.000022222 - 0.000011111) + 0.000011111).toFixed(10);
 					obj.geo.lat = parseFloat(obj.geo.lat) + (Math.random() );

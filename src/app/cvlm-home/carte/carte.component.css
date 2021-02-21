@@ -127,3 +127,25 @@ h1[_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_ngcontent-c3][_n
   font-weight: bolder;
   cursor: pointer;
 }
+
+.widget-c button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  width: 80px;
+  padding: 10px 20px;
+  border-radius: 15px;
+  outline: none;
+  border: none;
+  color: white;
+  font-weight: bold;
+  background: rgb(0, 183, 255);
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+}
+
+.widget-c button.bump {
+  background: rgb(255, 153, 0);
+}

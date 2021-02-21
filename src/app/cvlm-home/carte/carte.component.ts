@@ -48,7 +48,15 @@ export class CarteComponent implements OnInit, AfterViewInit {
 
     tiles.addTo(this.map);
 
-    // ! onZoomChange && onLocationChange
+    this.map.on('zoomend', () => {
+      this.zoom = this.map.getZoom()
+      this.zoomChange(this.zoom)
+
+    })
+
+    this.map.on('moveend', (e) => {
+      this.onChangeCenterMap(this.map.getBounds())
+    })
   }
 
   ngAfterViewInit() {
@@ -60,6 +68,7 @@ export class CarteComponent implements OnInit, AfterViewInit {
 			if (Object.values(this.lesMarqueurs[i])[0] == id){
 				this.lat = this.lesMarqueurs[i].geo.lat;
 				this.lng = this.lesMarqueurs[i].geo.lng  ;
+        this.map.setView([ Number(this.lat), Number(this.lng) ])
 				this.selectedMarker = this.lesMarqueurs[i];
 				this.isSelectedMarker = true;
 				this.descriptionService.changeDepeche(this.selectedMarker);
@@ -92,7 +101,8 @@ export class CarteComponent implements OnInit, AfterViewInit {
 					this.lesMarqueurs[this.playPosition].stroke = 5;
 					//
 					this.lat = this.lesMarqueurs[this.playPosition].geo.lat;
-					this.lng = this.lesMarqueurs[this.playPosition].geo.lng  ;
+					this.lng = this.lesMarqueurs[this.playPosition].geo.lng;
+          this.map.setView([ Number(this.lat), Number(this.lng) ])
 
 					this.selectedMarker = this.lesMarqueurs[this.playPosition];
 					this.isSelectedMarker = true;
@@ -105,6 +115,7 @@ export class CarteComponent implements OnInit, AfterViewInit {
 			},7000);
 		}
 	}
+
 	onCloseLocation(event){
 		this.isSelectedMarker = false;
 	}
@@ -144,15 +155,14 @@ export class CarteComponent implements OnInit, AfterViewInit {
 			this.radius = 500;
 
 		console.log(this.zoom);
-		console.log(z);
 	}
 
-	onChangeCenterMap(event){
+	onChangeCenterMap(bounds){
 		this.obj = {
-			carteNorthEastLat : event.getNorthEast().lat(),
-			carteNorthEastLng : event.getNorthEast().lng(),
-			carteSouthWestLat : event.getSouthWest().lat(),
-			carteSouthWestLng : event.getSouthWest().lng()
+			carteNorthEastLat : bounds._northEast.lat,
+			carteNorthEastLng : bounds._northEast.lng,
+			carteSouthWestLat : bounds._southWest.lat,
+			carteSouthWestLng : bounds._southWest.lng
 		}
 		this.carteSrevice.changeSizeCarte(this.obj);
 	}
@@ -162,12 +172,12 @@ export class CarteComponent implements OnInit, AfterViewInit {
 			navigator.geolocation.getCurrentPosition(position => {
 				this.lat = position.coords.latitude;
 				this.lng = position.coords.longitude;
+        this.map.setView([ Number(this.lat), Number(this.lng) ])
 			});
 		}
 	}
 
 	ngOnInit() {
-
 		this.radius = 50000;
 		this.getUserLocation();
 
@@ -193,8 +203,8 @@ export class CarteComponent implements OnInit, AfterViewInit {
 				let duo = this.lesMarqueurs.find( element => {
 					return element.geo.formatedAdress == obj.geo.formatedAdress && element.title != obj.title;
 				});
-				// console.log(duo)
-				if(duo){
+
+        if(duo){
 					let marge_lat = (Math.random() * (0.000022222 - 0.000011111) + 0.000011111).toFixed(10);
 					let marge_lng = (Math.random() * (0.000022222 - 0.000011111) + 0.000011111).toFixed(10);
 					obj.geo.lat = parseFloat(obj.geo.lat) + (Math.random() );
@@ -205,13 +215,11 @@ export class CarteComponent implements OnInit, AfterViewInit {
 
       for (let m of this.lesMarqueurs) {
         const circle = L.circleMarker(
-          [Number(m.geo.lat), Number(m.geo.lng)],
-          {
+          [Number(m.geo.lat), Number(m.geo.lng)], {
             fillOpacity: 1,
             color: m.couleur,
             fillColor: m.couleur + 'ab',
-          }
-          ).addTo(this.map);
+          }).addTo(this.map);
 
           circle.addEventListener('click', e => this.onChoseLocation(e, m.id))
       }
