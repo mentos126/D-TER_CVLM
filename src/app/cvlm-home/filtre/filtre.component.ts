@@ -20,6 +20,7 @@ export class FiltreComponent implements  OnInit {
 
     }
 
+  selectIsOpen = false
 	lesMarqueurs = [];
 	lesFiltres = ["aucun","zone","date","afficher seulement"]
 	filterSelected: string = "aucun";

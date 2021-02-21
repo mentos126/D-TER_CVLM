@@ -1,21 +1,32 @@
 <div class="widget-f">
-  {{filterSelected}}
-	<select>
-		<option *ngFor="let filtre of lesFiltres" (click)="onSelect(filtre)" >
-			{{ filtre }}
-		</option>
-	</select>
+	<div class="select" (click)="selectIsOpen = !selectIsOpen">
+    {{filterSelected}}
+    <div *ngIf="selectIsOpen">
+      <div class="select-item" *ngFor="let filtre of lesFiltres; let i = index" (click)="onSelect(filtre)" [ngStyle]="{'top.px': (i * 32) + 31}">
+        {{ filtre }}
+      </div>
+    </div>
+	</div>
 	<button *ngIf="!isSelectedStats" class="btn" (click)="onOpenStats($event)"> Stats </button>
 	<button *ngIf="isSelectedStats" class="btn bump" (click)="onCloseStats()"> Close </button>
-
-	<div *ngIf="filterSelected == 'date'" class="ui-g-12 ui-md-4">
+	<div *ngIf="filterSelected == 'date'" class=" option ui-g-12 ui-md-4">
 		<p-calendar [(ngModel)]="date" placeholder="Date de départ" [locale]="fr" dateFormat="yy-mm-dd" (onSelect)="onSelectDate($event)" ></p-calendar>
 	</div>
-
-	<form *ngIf="filterSelected == 'afficher seulement'">
-		<input type="radio" name="onlySelect" (click)="onRadio($event, 'positif')" value="positif" checked> Positif<br>
-		<input type="radio" name="onlySelect" (click)="onRadio($event, 'neutre')" value="neutre"> Neutre<br>
-		<input type="radio" name="onlySelect" (click)="onRadio($event, 'negatif')" value="negetif"> Négatif
+	<form *ngIf="filterSelected == 'afficher seulement'" class="option">
+    <div (click)="onRadio($event, 'positif')">
+      <input id="pos" type="radio" name="onlySelect" value="positif" checked>
+      <label for="pos">Positif</label>
+    </div>
+    <br>
+    <div (click)="onRadio($event, 'neutre')">
+      <input id="ntr" type="radio" name="onlySelect" value="neutre">
+      <label for="ntr">Neutre</label>
+    </div>
+    <br>
+    <div (click)="onRadio($event, 'negatif')">
+      <input id="neg" type="radio" name="onlySelect" value="negatif">
+      <label for="neg">Négatif</label>
+    </div>
 	</form>
 	<div class="grid-canvas-desc">
 		<div class="desc" *ngIf="isSelectedStats">
