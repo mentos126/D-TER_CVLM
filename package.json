@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "prod": "ng build --prod --base-href \"https://mentos126.github.io/D-TER_CVLM/\" &&  npx angular-cli-ghpages —-dir=dist/CVLM",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
@@ -21,6 +22,7 @@
     "@angular/platform-browser": "~11.2.0",
     "@angular/platform-browser-dynamic": "~11.2.0",
     "@angular/router": "~11.2.0",
+    "angular-cli-ghpages": "^1.0.0-rc.1",
     "bootstrap": "^4.6.0",
     "chart.js": "^2.9.4",
     "chartjs-color": "^2.4.1",
