@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "prod": "ng build --prod --base-href \"https://mentos126.github.io/D-TER_CVLM/\" &&  npx angular-cli-ghpages —-dir=dist/CVLM",
+    "prod": "ng build --prod --output-path project --base-href \"https://mentos126.github.io/D-TER_CVLM/CVLM\" &&  npx angular-cli-ghpages —-dir=dist/CVLM",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",

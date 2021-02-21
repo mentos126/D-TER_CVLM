@@ -1,0 +1,145 @@
+[{
+	"id": 1,
+	"source": "The News",
+	"published": "2018-03-12 17:17:00",
+	"image": "https://static.ladepeche.fr/content/media/image/350/2018/03/12/000-ob161-c41e4091709-original.jpg",
+	"link": "https://www.ladepeche.fr/article/2018/03/12/2758144-ue-hand-spinner-star-jouets-2017-produits-dangereux.html",
+	"title": "UE: le \"hand spinner\", star des jouets en 2017... et des produits dangereux",
+	"polariteValue": "negatif",
+	"content": "description1",
+	"polarite": {
+		"simple": -3,
+		"complet": {
+			"pos": 1,
+			"neg": -3,
+			"neut": -0.1
+		},
+		"detail": [{
+			"mot": "je",
+			"note": 0
+		},
+		{
+			"mot": "suis",
+			"note": 1
+		},
+		{
+			"mot": "fou",
+			"note": -3
+		}
+	]
+	},
+	"geo": {
+		"lat": 44.0,
+		"lng": 0.0,
+		"fomatedAdress": "adresse1"
+	}
+},
+{
+	"id": 2,
+	"source": "The News",
+	"published": "2018-03-12 17:17:00",
+	"image": "https://static.ladepeche.fr/content/media/image/350/2018/03/12/000-ob161-c41e4091709-original.jpg",
+	"link": "https://www.ladepeche.fr/article/2018/03/12/2758144-ue-hand-spinner-star-jouets-2017-produits-dangereux.html",
+	"title": "UE: le \"hand spinner\", star des jouets en 2017... et des produits dangereux",
+	"polariteValue": "negatif",
+	"content": "description2",
+	"polarite": {
+		"simple": 3,
+		"complet": {
+			"pos": 3,
+			"neg": 1,
+			"neut": 0.1
+		},
+		"detail": [{
+			"mot": "je",
+			"note": 0
+		},
+		{
+			"mot": "suis",
+			"note": 1
+		},
+		{
+			"mot": "fou",
+			"note": -3
+		}
+	]
+	},
+	"geo": {
+		"lat": 44.0,
+		"lng": 1.0,
+		"fomatedAdress": "adresse2"
+	}
+},
+{
+	"id": 3,
+	"source": "The News",
+	"published": "2018-03-12 17:17:00",
+	"image": "https://static.ladepeche.fr/content/media/image/350/2018/03/12/000-ob161-c41e4091709-original.jpg",
+	"link": "https://www.ladepeche.fr/article/2018/03/12/2758144-ue-hand-spinner-star-jouets-2017-produits-dangereux.html",
+	"title": "UE: le \"hand spinner\", star des jouets en 2017... et des produits dangereux",
+	"polariteValue": "negatif",
+	"content": "description3",
+	"polarite": {
+		"simple": 0,
+		"complet": {
+			"pos": 1,
+			"neg": 0.5,
+			"neut": 3
+		},
+		"detail": [{
+			"mot": "je",
+			"note": 0
+		},
+		{
+			"mot": "suis",
+			"note": 1
+		},
+		{
+			"mot": "fou",
+			"note": -3
+		}
+	]
+	},
+	"geo": {
+		"lat": 44.0,
+		"lng": 2.0,
+		"fomatedAdress": "adresse3"
+	}
+},
+{
+	"id": 4,
+	"source": "The News",
+	"published": "2018-03-12 17:17:00",
+	"image": "https://static.ladepeche.fr/content/media/image/350/2018/03/12/000-ob161-c41e4091709-original.jpg",
+	"link": "https://www.ladepeche.fr/article/2018/03/12/2758144-ue-hand-spinner-star-jouets-2017-produits-dangereux.html",
+	"title": "UE: le \"hand spinner\", star des jouets en 2017... et des produits dangereux",
+	"polariteValue": "negatif",
+	"content": "description4",
+	"polarite": {
+		"simple": -3,
+		"complet": {
+			"pos": 1.2,
+			"neg": 2,
+			"neut": 1.2
+		},
+		"detail": [{
+			"mot": "je",
+			"note": 0
+		},
+		{
+			"mot": "suis",
+			"note": 1
+		},
+		{
+			"mot": "fou",
+			"note": -3
+		}
+	]
+	},
+	"geo": {
+		"lat": 44.0,
+		"lng": 3.0,
+		"fomatedAdress": "adresse4"
+	}
+}
+]
