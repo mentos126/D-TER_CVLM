@@ -4,9 +4,6 @@ import { DepecheServiceService } from '../depeche-service.service'
 import { CarteServiceService } from '../carte-service.service';
 import { IDepeche } from '../depeche';
 
-import  * as L from 'leaflet';
-import 'mapbox-gl-leaflet';
-
 @Component({
 	selector: 'app-carte2',
 	templateUrl: './carte.component.html',
@@ -21,7 +18,8 @@ export class CarteComponent implements OnInit, AfterViewInit {
     ) {
   }
 
-  map: L.Map;
+  map: any;
+  L: any;
 
 	lesMarqueurs: any = [];
 	lat: Number = 43;
@@ -37,22 +35,12 @@ export class CarteComponent implements OnInit, AfterViewInit {
 	radius : Number;
 
   private initMap(): void {
-    this.map = L.map('map', {
-      center: [ Number(this.lat), Number(this.lng) ],
-      zoom: Number(this.zoom)
-    });
+    this.L = window['L'];
+    this.map = this.L.map('map').setView([ Number(this.lat), Number(this.lng) ], Number(this.zoom));
 
-    let style_ = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-    let styleJson = 'https://api.maptiler.com/maps/a5cdc8fc-e41d-4708-84ee-4ecebf3d6f4f/style.json?key=QOoIcT5IkHrO1kMC4yh9';
-    
-    const tiles = L.tileLayer(styleJson, { maxZoom: 19 });
-
-    var gl = L.mapboxGL({
-      accessToken: 'pk.eyJ1IjoibWVudG9zMTI2IiwiYSI6ImNrbGNsbjE5NTBpMm0ydm1qbmxzaDJ4MXcifQ.E45MTbNk62sq9oX80_P-1w',
-      style: styleJson
+    var gl = this.L.mapboxGL({
+      style: 'https://api.maptiler.com/maps/a5cdc8fc-e41d-4708-84ee-4ecebf3d6f4f/style.json?key=QOoIcT5IkHrO1kMC4yh9'
     }).addTo(this.map);
-
-    tiles.addTo(this.map);
 
     this.map.on('zoomend', () => {
       this.zoom = this.map.getZoom()
@@ -184,7 +172,7 @@ export class CarteComponent implements OnInit, AfterViewInit {
 	}
 
 	ngOnInit() {
-		this.radius = 50000;
+    this.radius = 50000;
 		this.getUserLocation();
 
 		this.depecheService
@@ -220,7 +208,7 @@ export class CarteComponent implements OnInit, AfterViewInit {
 			});
 
       for (let m of this.lesMarqueurs) {
-        const circle = L.circleMarker(
+        const circle = this.L.circleMarker(
           [Number(m.geo.lat), Number(m.geo.lng)], {
             fillOpacity: 1,
             color: m.couleur,
