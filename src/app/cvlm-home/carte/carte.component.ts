@@ -5,6 +5,7 @@ import { CarteServiceService } from '../carte-service.service';
 import { IDepeche } from '../depeche';
 
 import  * as L from 'leaflet';
+import 'mapbox-gl-leaflet';
 
 @Component({
 	selector: 'app-carte2',
@@ -41,10 +42,15 @@ export class CarteComponent implements OnInit, AfterViewInit {
       zoom: Number(this.zoom)
     });
 
-    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    });
+    let style_ = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+    let styleJson = 'https://api.maptiler.com/maps/a5cdc8fc-e41d-4708-84ee-4ecebf3d6f4f/style.json?key=QOoIcT5IkHrO1kMC4yh9';
+    
+    const tiles = L.tileLayer(styleJson, { maxZoom: 19 });
+
+    var gl = L.mapboxGL({
+      accessToken: 'pk.eyJ1IjoibWVudG9zMTI2IiwiYSI6ImNrbGNsbjE5NTBpMm0ydm1qbmxzaDJ4MXcifQ.E45MTbNk62sq9oX80_P-1w',
+      style: styleJson
+    }).addTo(this.map);
 
     tiles.addTo(this.map);
 
