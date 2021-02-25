@@ -36,7 +36,10 @@ export class CarteComponent implements OnInit, AfterViewInit {
 
   private initMap(): void {
     this.L = window['L'];
-    this.map = this.L.map('map').setView([ Number(this.lat), Number(this.lng) ], Number(this.zoom));
+    this.map = this.L.map('map',{
+          minZoom: 3
+      })
+      .setView([ Number(this.lat), Number(this.lng) ], Number(this.zoom));
 
     var gl = this.L.mapboxGL({
       style: 'https://api.maptiler.com/maps/a5cdc8fc-e41d-4708-84ee-4ecebf3d6f4f/style.json?key=QOoIcT5IkHrO1kMC4yh9'
@@ -147,8 +150,6 @@ export class CarteComponent implements OnInit, AfterViewInit {
 			this.radius = 1000;
 		else if(z == 18)
 			this.radius = 500;
-
-		console.log(this.zoom);
 	}
 
 	onChangeCenterMap(bounds){
