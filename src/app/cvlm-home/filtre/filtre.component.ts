@@ -76,58 +76,54 @@ export class FiltreComponent implements  OnInit {
 	}
 
 	onSelect(s : string){
-    console.log(s)
 		this.filterSelected = s;
 		switch (s) {
 			case "aucun":
-			this.lesMarqueursFiltrees = this.lesMarqueurs;
-			this.carteService.changeDepecheFiltrees(this.lesMarqueurs);
-			break;
+        this.lesMarqueursFiltrees = this.lesMarqueurs;
+        this.carteService.changeDepecheFiltrees(this.lesMarqueurs);
+        break;
 
 			/*************************************************/
 			case "zone":
-			this.lesMarqueursFiltrees = [];
-			for (let x of this.lesMarqueurs){
-				if(x.geo.lat < this.carteNorthEastLat){
-					if(x.geo.lat > this.carteSouthWestLat){
-						if(x.geo.lng < this.carteNorthEastLng){
-							if(x.geo.lng > this.carteSouthWestLng){
-								this.lesMarqueursFiltrees.push(x);
-							}
-						}
-					}
-				}
-			}
-			this.carteService.changeDepecheFiltrees(this.lesMarqueursFiltrees);
-			break;
+        this.lesMarqueursFiltrees = [];
+        for (let x of this.lesMarqueurs){
+          if(x.geo.lat < this.carteNorthEastLat){
+            if(x.geo.lat > this.carteSouthWestLat){
+              if(x.geo.lng < this.carteNorthEastLng){
+                if(x.geo.lng > this.carteSouthWestLng){
+                  this.lesMarqueursFiltrees.push(x);
+                }
+              }
+            }
+          }
+        }
+        this.carteService.changeDepecheFiltrees(this.lesMarqueursFiltrees);
+        break;
 
 			/*************************************************/
 			case "date":
-			this.lesMarqueursFiltrees = this.lesMarqueurs;
-			if(this.date != undefined){
-				this.lesMarqueursFiltrees =[];
-				for (let x of this.lesMarqueurs){
-					console.log("==========");
-					console.log(this.date);
-					console.log(moment(x.published, "YYYY-MM-DD"));
-					if(moment(this.date, "DD-MM-YYYY") <= moment(x.published, "YYYY-MM-DD")){
-						this.lesMarqueursFiltrees.push(x);
-					}
-				}
+        this.lesMarqueursFiltrees = this.lesMarqueurs;
+        if(this.date != undefined){
+          this.lesMarqueursFiltrees =[];
+          for (let x of this.lesMarqueurs){
+            if(moment(this.date, "DD-MM-YYYY") <= moment(x.published, "YYYY-MM-DD")){
+              this.lesMarqueursFiltrees.push(x);
+            }
+          }
 
-			}
-			this.carteService.changeDepecheFiltrees(this.lesMarqueursFiltrees);
-			break;
+        }
+        this.carteService.changeDepecheFiltrees(this.lesMarqueursFiltrees);
+        break;
 
 			/*************************************************/
 			case "afficher seulement":
-			this.onRadio(null,this.unqiueSelected);
-			break;
+        this.onRadio(null,this.unqiueSelected);
+        break;
 
 			/*************************************************/
 			default:
-			console.error("PROBLEME DE SELECTION");;
-			break;
+        console.error("PROBLEME DE SELECTION");;
+        break;
 		}
 		this.formateData();
 	}
@@ -190,7 +186,6 @@ export class FiltreComponent implements  OnInit {
 	}
 
 	onSelectDate(event){
-		console.log(event);
 		this.date =  moment(event, "DD-MM-YYYY").toDate();
 		this.onSelect("date");
 	}
@@ -239,8 +234,11 @@ export class FiltreComponent implements  OnInit {
 		});
 
 		this.carteService
-		.currentDepechesFiltres
-		.subscribe(res => this.data = res);
+      .depechesFiltrees
+      .subscribe(res => {
+        this.data = res
+      });
+
 
 		this.carteService
 		.currentCarteCoord
@@ -278,13 +276,6 @@ export class FiltreComponent implements  OnInit {
 		let prevYear = (prevMonth === 11) ? year - 1 : year;
 		let nextMonth = (month === 11) ? 0 : month + 1;
 		let nextYear = (nextMonth === 0) ? year + 1 : year;
-		/*this.maxDate = new Date();
-		this.maxDate.setMonth(nextMonth);
-		this.maxDate.setFullYear(nextYear);
-		this.minDate = new Date();
-		this.minDate.setMonth(prevMonth);
-		this.minDate.setFullYear(prevYear);
-*/
 	}
 
 }

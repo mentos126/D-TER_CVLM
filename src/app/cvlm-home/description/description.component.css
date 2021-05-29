@@ -99,7 +99,9 @@ a {
 
 .widget-1 .score-simple {
   font-size: 1.5em;
-
+  padding: 15px;
+  color: white;
+  font-weight: bold;
 }
 
 .widget-1 .complet-neg,

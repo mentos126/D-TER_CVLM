@@ -44,25 +44,18 @@ export class ModifyComponent implements OnInit {
 
     this.subscriptions.push(
       this.modalService.onHide.subscribe((reason: string) => {
-        console.log('onHide event');
         // this.test();
       })
     );
     this.subscriptions.push(_combine);
-    console.log(template)
     this.modalRef = this.modalService.show(template,{ class: 'modale'});
   }
 
   test() : void {
     this.depeche = this.copieDep;
-    console.log(this.depeche)
   }
 
   changeWordPolarity(index, value){
-    console.log(index + ' ' + value);
-    console.log(this.copieDep.polarite.detail[index].note);
-    console.log(value + ' ' + typeof value);
-
     this.copieDep.polarite.detail[index].note = (typeof value == 'number' ? value : parseInt(value));
     this.reEval();
   }
@@ -72,10 +65,8 @@ export class ModifyComponent implements OnInit {
       this.copieDep.polarite.complet.neg = 0;
       this.copieDep.polarite.complet.pos = 0;
       this.copieDep.polarite.complet.neut = 0;
-      console.log("[REEVAL]");
 
 			for(let p of this.copieDep.polarite.detail){
-        console.log({mot: p.mot, note: p.note})
 				if(typeof p.note === "number"){
 					/* POSITIF */
 					if(p.note  > 0){
@@ -96,8 +87,6 @@ export class ModifyComponent implements OnInit {
 				}else{
 					this.copieDep.polarite.complet.neut++;
         }
-        console.log({mot: p.mot, note: p.note})
-        console.log('------------------------')
 			}
 			// SCORE général simplifié
 			if(this.copieDep.polarite.complet.pos > (this.copieDep.polarite.complet.neg * (-1))){
@@ -142,14 +131,12 @@ export class ModifyComponent implements OnInit {
         .modifierTout(this.depeche)
         .subscribe(res => {
           this.modalRef.hide()
-          console.log('Recorded with success')
         })
       } else {
         this.service
         .modifierDepeche(this.depeche)
         .subscribe(res => {
           this.modalRef.hide()
-          console.log('Recorded with success')
         })
     }
   }

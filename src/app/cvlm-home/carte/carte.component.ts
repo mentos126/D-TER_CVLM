@@ -3,6 +3,7 @@ import { DescriptionServiceService } from '../description-service.service';
 import { DepecheServiceService } from '../depeche-service.service'
 import { CarteServiceService } from '../carte-service.service';
 import { IDepeche } from '../depeche';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
 	selector: 'app-carte2',
@@ -20,7 +21,6 @@ export class CarteComponent implements OnInit, AfterViewInit {
 
   map: any;
   L: any;
-
 	lesMarqueurs: any = [];
 	lat: Number = 43;
 	lng: Number = 3;
@@ -86,8 +86,7 @@ export class CarteComponent implements OnInit, AfterViewInit {
 		}else{
 			this.isPlayed = true;
 			this.intervalID = window.setInterval(()=>{
-				console.log(this.lesMarqueurs[this.playPosition]);
-				if(this.playPosition < this.lesMarqueurs.length){
+        if(this.playPosition < this.lesMarqueurs.length){
 
 					if(this.playPosition > 0){
 						this.lesMarqueurs[this.playPosition-1].stroke = 0;
@@ -172,6 +171,43 @@ export class CarteComponent implements OnInit, AfterViewInit {
 		}
 	}
 
+  rewriteMap () {
+    this.lesMarqueurs.map(obj => {
+      let rObj: any = {};
+      rObj = obj;
+      if(obj.polarite.simple > 0 ){
+        rObj.couleur = "#8ee000";
+      }else if(obj.polarite.simple == 0){
+        rObj.couleur = "#00b7ff";
+      }else{
+        rObj.couleur = "#ff0000";
+      }
+
+      let duo = this.lesMarqueurs.find( element => {
+        return element.geo.formatedAdress == obj.geo.formatedAdress && element.title != obj.title;
+      });
+
+      if(duo){
+        let marge_lat = (Math.random() * (0.000022222 - 0.000011111) + 0.000011111).toFixed(10);
+        let marge_lng = (Math.random() * (0.000022222 - 0.000011111) + 0.000011111).toFixed(10);
+        obj.geo.lat = parseFloat(obj.geo.lat) + (Math.random() );
+        obj.geo.lng = parseFloat(obj.geo.lng) + (Math.random() );
+      }
+      return rObj;
+    });
+
+    for (let m of this.lesMarqueurs) {
+      const circle = this.L.circleMarker(
+        [Number(m.geo.lat), Number(m.geo.lng)], {
+          fillOpacity: 1,
+          color: m.couleur,
+          fillColor: m.couleur + 'ab',
+        }).addTo(this.map);
+
+        circle.addEventListener('click', e => this.onChoseLocation(e, m.id))
+    }
+  };
+
 	ngOnInit() {
     this.radius = 50000;
 		this.getUserLocation();
@@ -180,58 +216,22 @@ export class CarteComponent implements OnInit, AfterViewInit {
 		.getMarqueurs()
 		.subscribe(res => {
 			this.lesMarqueurs = res;
-			this.lesMarqueurs.map(obj => {
-				let rObj: any = {};
-				rObj = obj;
-				if(obj.polarite.simple >= 2.5 ){
-					rObj.couleur = "#8ee000";
-				}else if(obj.polarite.simple > 0){
-					rObj.couleur = "#00e079";
-				}else if(obj.polarite.simple == 0){
-					rObj.couleur = "#00b7ff";
-				}else if(obj.polarite.simple > -1){
-					rObj.couleur = "#ff8700";
-				}else{
-					rObj.couleur = "#ff0000";
-				}
-
-				let duo = this.lesMarqueurs.find( element => {
-					return element.geo.formatedAdress == obj.geo.formatedAdress && element.title != obj.title;
-				});
-
-        if(duo){
-					let marge_lat = (Math.random() * (0.000022222 - 0.000011111) + 0.000011111).toFixed(10);
-					let marge_lng = (Math.random() * (0.000022222 - 0.000011111) + 0.000011111).toFixed(10);
-					obj.geo.lat = parseFloat(obj.geo.lat) + (Math.random() );
-					obj.geo.lng = parseFloat(obj.geo.lng) + (Math.random() );
-				}
-				return rObj;
-			});
-
-      for (let m of this.lesMarqueurs) {
-        const circle = this.L.circleMarker(
-          [Number(m.geo.lat), Number(m.geo.lng)], {
-            fillOpacity: 1,
-            color: m.couleur,
-            fillColor: m.couleur + 'ab',
-          }).addTo(this.map);
-
-          circle.addEventListener('click', e => this.onChoseLocation(e, m.id))
-      }
-
+			this.rewriteMap()
 		});
 
-		this.carteSrevice
-		.currentDepechesFiltres
-		.subscribe(res => this.lesMarqueurs = res);
+		this.carteSrevice.depechesFiltrees.subscribe(res => {
+      this.lesMarqueurs = res
+    })
+
 
 		this.carteSrevice
-		.currentCarteCoord
-		.subscribe(res => this.obj = res);
+      .currentCarteCoord
+      .subscribe(res => this.obj = res);
 
 		this.descriptionService
-		.currentDepeche
-		.subscribe(res => this.selectedMarker = res);
+      .currentDepeche
+      .subscribe(res => this.selectedMarker = res);
+
 	}
 
 }

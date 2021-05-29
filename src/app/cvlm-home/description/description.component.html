@@ -17,14 +17,17 @@
       </div>
     </li>
     <li class="row polarite">
-        <div class="col-3 complet-pos"> {{ depeche.polarite.complet.pos }} <br><span class="ext">positif</span></div>
+        <!-- <div class="col-3 complet-pos"> {{ depeche.polarite.complet.pos }} <br><span class="ext">positif</span></div>
         <div class="col-3 complet-neg"> {{ depeche.polarite.complet.neg }} <br><span class="ext">negatif</span></div>
         <div class="col-3 complet-neut"> {{ depeche.polarite.complet.neut }} <br><span class="ext">neutres</span></div>
-        <div class="col-3 score-simple" [ngStyle]="{'background-color': depeche.couleur}"><span class="scb">{{ depeche.polarite.simple }}</span><br><span class="int">max*</span></div>
+        <div class="col-3 score-simple" [ngStyle]="{'background-color': depeche.couleur}"><span class="scb">{{ depeche.polarite.simple }}</span><br><span class="int">max*</span></div> -->
+        <div class="col-3 score-simple" [ngStyle]="{'background-color': depeche.couleur}">
+          <span class="scb">{{ depeche.polarite.simple > 0 ? 'Positif' : depeche.polarite.simple < 0 ? 'Négatif' : 'Neutre'}}</span>
+        </div>
     </li>
     <li class="nav-item contenu">
       <p>{{ depeche.content }}</p>
     </li>
   </ul>
-  <app-modify></app-modify>
+  <!-- <app-modify></app-modify> -->
 </div>
